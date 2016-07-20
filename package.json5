@@ -1,0 +1,45 @@
+{
+  "name": "@novivia/open-sourcer",
+  "version": "0.0.0",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "publishConfig": {
+    "registry": "https://npm.novivia.com"
+  },
+  "description": "Novivia Node.js module open-sourcer.",
+  "authors": [
+    "Mathieu M-Gosselin <mathieumg@novivia.com>",
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git.novivia.com/nov/tools.open-sourcer"
+  },
+  "scripts": {
+    "build": "build-module build -b cli.js -p cliWrapper",
+    "lint": "novivia-linter lint",
+    "open-source": "babel-node ./cliWrapper",
+    "pub": "build-module publish",
+    "release": "build-module release",
+  },
+  "bin": {
+    "open-source": "./cliWrapper",
+  },
+  "novivia-linter": {
+    "targets": {
+      "global": ["lib", "cli.js"],
+    },
+  },
+  "devDependencies": {
+    // Novivia dependencies.
+    "@auex/build-module": "^0.2.6",
+    "@novivia/linter": "^1.0.0-beta.6",
+
+    // npm dependencies.
+    "babel-cli": "^6.11.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-0": "^6.5.0",
+  },
+  "dependencies": {"json5":"^0.5.0","fs-extra":"^0.30.0","bluebird":"^3.4.1"
+    // npm dependencies.
+
+  }
+}
