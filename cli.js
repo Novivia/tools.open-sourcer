@@ -21,7 +21,6 @@ async function readFile(filename) {
 }
 
 function unscopeModuleName(moduleName) {
-  // Extract namespace.
   const [
     match,
     namespace,
@@ -52,7 +51,6 @@ async function openSource() {
 
   console.info(`Creating and checking out "${branchName}" branch.`);
 
-  // const headCommit = await repository.getHeadCommit();
   const defaultSignature = repository.defaultSignature();
   const newGitBranch = await repository.createBranch(
     branchName,
@@ -144,7 +142,7 @@ async function openSource() {
 async function runOpenSource() {
   try {
     await openSource();
-  } catch(e) {
+  } catch (e) {
     console.error("An error occured:", e);
   }
 }
