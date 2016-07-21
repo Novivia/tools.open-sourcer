@@ -1,2 +1,7 @@
 #!/usr/bin/env node
+
+// For dev only.
+require("babel-register");
+require("babel-polyfill");
+
 require("./cli");
