@@ -3,6 +3,8 @@
  * All rights reserved.
  */
 
+/* eslint-disable no-console */
+
 import fsExtra from "fs-extra";
 import Git from "nodegit";
 import {join as joinPath} from "path";
@@ -12,38 +14,28 @@ import {promisifyAll} from "bluebird";
 
 const fs = promisifyAll(fsExtra);
 
+const JSON_SPACING = 2;
+
 async function getPackageInfo() {
   return parseJson5(await readFile(joinPath(process.cwd(), "package.json5")));
 }
 
 async function readFile(filename) {
-  return fs.readFileAsync(filename, "utf8");
-}
-
-function unscopeModuleName(moduleName) {
-  const [
-    match,
-    namespace,
-    packageName,
-  ] = /^@(.*)\/(.*)$/.exec(moduleName);
-
-  return {
-    originalName: packageName,
-    originalScope: namespace,
-    unscopedName: `${namespace}-${packageName}`,
-  };
+  return await fs.readFileAsync(filename, "utf8");
 }
 
 async function openSource() {
   const basePath = process.cwd();
 
   // Get current Git repository.
+  // eslint-disable-next-line security/detect-non-literal-fs-filename
   const repository = await Git.Repository.open(basePath);
   const repositoryStatuses = await repository.getStatus();
 
   if (repositoryStatuses.filter(status => status.inIndex()).length > 0) {
-    console.error("Your repository contains unstaged changes, aborting.");
-    return;
+    return console.error(
+      "Your repository contains unstaged changes, aborting.",
+    );
   }
 
   const packageInfo = await getPackageInfo();
@@ -63,21 +55,6 @@ async function openSource() {
   await repository.checkoutBranch(newGitBranch);
 
   console.info("Updating package data...");
-
-  // Extract namespace.
-  const {
-    unscopedName,
-  } = unscopeModuleName(packageInfo.name);
-
-  // Rename module name from `@something/name` to `something-name`.
-  // packageInfo.name = unscopedName;
-
-  // const dependencyTypes = [
-  //   "dependencies",
-  //   "devDependencies",
-  //   "peerDependencies",
-  // ];
-  // for (const dependencyType of dependencyTypes)
 
   // Update git repository.
   const githubRemote = await repository.getRemote("github");
@@ -111,7 +88,7 @@ async function openSource() {
 
   await fs.writeFileAsync(
     joinPath(basePath, "package.json"),
-    JSON.stringify(packageInfo, null, 2),
+    JSON.stringify(packageInfo, null, JSON_SPACING),
   );
 
   console.info("Tracking package.json file...");
