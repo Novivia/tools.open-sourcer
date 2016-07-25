@@ -25,7 +25,7 @@
   },
   "novivia-linter": {
     "targets": {
-      "global": ["lib", "cli.js"],
+      "global": ["cli.js"],
     },
   },
   "devDependencies": {
