@@ -1,6 +1,6 @@
 {
   "name": "@novivia/open-sourcer",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "license": "SEE LICENSE IN LICENSE.md",
   "publishConfig": {
     "registry": "https://npm.novivia.com"
