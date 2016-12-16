@@ -14,37 +14,35 @@
     "url": "git+ssh://git.novivia.com/nov/tools.open-sourcer"
   },
   "scripts": {
-    "build": "build-module build -b cli.js -p cliWrapper",
+    "build": "novivia-builder build",
     "lint": "novivia-linter lint",
-    "open-source": "babel-node ./cliWrapper",
-    "pub": "build-module publish",
-    "release": "build-module release",
+    "open-source": "./cliWrapper",
+    "pub": "novivia-builder publish",
+    "release": "novivia-builder release",
   },
   "bin": {
     "open-source": "./cliWrapper",
   },
+  "novivia-builder": {
+    "babelPatterns": ["cli.js"],
+    "packagePatterns": ["cliWrapper"],
+  },
   "novivia-linter": {
     "targets": {
-      "global": ["cli.js"],
+      "global": ["lib", "cli.js"],
     },
   },
   "devDependencies": {
     // Novivia dependencies.
-    "@novivia/build-module": "^0.4.0",
-    "@novivia/linter": "^1.6.0",
-
-    // npm dependencies.
-    "babel-cli": "^6.18.0",
-    "babel-polyfill": "^6.16.0",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-stage-0": "^6.16.0",
-    "babel-register": "^6.18.0",
+    "@novivia/babel": "^1.0.0",
+    "@novivia/build-module": "^0.5.1",
+    "@novivia/linter": "^1.10.1",
   },
   "dependencies": {
     // npm dependencies.
     "bluebird": "^3.4.6",
     "fs-extra": "^1.0.0",
-    "json5": "^0.5.0",
+    "json5": "^0.5.1",
     "nodegit": "^0.16.0",
     "tempura": "0.0.8",
   },
