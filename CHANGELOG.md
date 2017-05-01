@@ -1,5 +1,12 @@
 # Versions
 
+## v0.1.3 - (01/05/2017)
+
+* Updated dependencies:
+    * `fs-extra` to v3.
+    * `nodegit` to v0.18.
+
+
 ## v0.1.2 - (16/12/2016)
 
 * New dependency: `@novivia/babel`
