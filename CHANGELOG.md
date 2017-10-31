@@ -1,5 +1,17 @@
 # Versions
 
+## v0.1.4 - (31/10/2017)
+
+* New dependency: `common-tags`
+* Updated dependencies:
+    * `fs-extra` to v4.
+    * `nodegit` to v0.20.
+
+* Removed dependencies:
+    * `bluebird`
+    * `tempura`
+
+
 ## v0.1.3 - (01/05/2017)
 
 * Updated dependencies:
